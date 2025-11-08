@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 function ProductDetails() {
+
+
   const { id } = useParams();  
   const [product, setProduct] = useState(null);
 
@@ -25,6 +27,16 @@ function ProductDetails() {
       </div>
     );
   }
+
+  const role = localStorage.getItem("soxoRole");
+  if (role !== "admin") {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <h1 className="text-xl text-red-600">Access denied</h1>
+      </div>
+    );
+  }
+
 
   return (
     <div className="min-h-screen bg-white p-6 flex items-center justify-center">

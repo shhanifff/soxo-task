@@ -6,6 +6,8 @@ function EditProduct() {
   const { id } = useParams();
   const navigate = useNavigate();
 
+  
+
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
@@ -30,15 +32,12 @@ function EditProduct() {
       return;
     }
 
-    const res = await axios.put(
-      `http://localhost:1001/api/editById/${id}`,
-      {
-        title,
-        price,
-        description,
-        image,
-      }
-    );
+    const res = await axios.put(`http://localhost:1001/api/editById/${id}`, {
+      title,
+      price,
+      description,
+      image,
+    });
 
     console.log("updated", res.data);
 
@@ -46,26 +45,40 @@ function EditProduct() {
     navigate(`/ProductDetails/${id}`);
   };
 
+
+
+  
+
   useEffect(() => {
     fetchProduct();
   }, []);
 
+
+  const role = localStorage.getItem("soxoRole");
+  if (role !== "admin") {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <h1 className="text-xl text-red-600">Access denied</h1>
+      </div>
+    );
+  }
+
+  
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-white">
       <div className="w-full max-w-md bg-gray-100 p-6 rounded-lg shadow-sm">
-
         <h1 className="text-xl font-semibold text-center mb-6 text-black">
           Edit Product
         </h1>
 
         <div className="flex flex-col gap-4">
-          
           <div>
             <label className="block text-black text-sm mb-1">Title</label>
             <input
               type="text"
               value={title}
-              onChange={(e)=>setTitle(e.target.value)}
+              onChange={(e) => setTitle(e.target.value)}
               className="border border-black w-full h-10 px-3 rounded-md bg-white text-black"
             />
           </div>
@@ -75,7 +88,7 @@ function EditProduct() {
             <input
               type="text"
               value={price}
-              onChange={(e)=>setPrice(e.target.value)}
+              onChange={(e) => setPrice(e.target.value)}
               className="border border-black w-full h-10 px-3 rounded-md bg-white text-black"
             />
           </div>
@@ -85,7 +98,7 @@ function EditProduct() {
             <textarea
               rows="3"
               value={description}
-              onChange={(e)=>setDescription(e.target.value)}
+              onChange={(e) => setDescription(e.target.value)}
               className="border border-black w-full px-3 py-2 rounded-md bg-white text-black"
             ></textarea>
           </div>
@@ -95,7 +108,7 @@ function EditProduct() {
             <input
               type="text"
               value={image}
-              onChange={(e)=>setImage(e.target.value)}
+              onChange={(e) => setImage(e.target.value)}
               className="border border-black w-full h-10 px-3 rounded-md bg-white text-black"
             />
           </div>
@@ -107,7 +120,6 @@ function EditProduct() {
             Update Product
           </button>
         </div>
-
       </div>
     </div>
   );

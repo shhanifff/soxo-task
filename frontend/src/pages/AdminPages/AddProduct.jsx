@@ -5,12 +5,16 @@ import { useNavigate } from "react-router-dom";
 function AddProduct() {
   const navigate = useNavigate();
 
+
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDesc] = useState("");
   const [image, setImage] = useState("");
 
   const handleSubmit = async () => {
+    
+
+
     if (!title || !price || !description || !image) {
       alert("Fill all fields");
       return;
@@ -24,6 +28,17 @@ function AddProduct() {
     navigate(-1)
 
   };
+
+
+  const role = localStorage.getItem("soxoRole");
+  if (role !== "admin") {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <h1 className="text-xl text-red-600">Access denied</h1>
+      </div>
+    );
+  }
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-white">
