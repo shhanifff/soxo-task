@@ -50,7 +50,7 @@ function Home() {
               <p className="text-sm text-black mt-1">{item.description}</p>
 
               <p className="text-xl text-black font-bold mt-3">
-                {item.price}
+                ${item.price}
               </p>
 
             </div>
