@@ -24,7 +24,6 @@ function EditProduct() {
     setImage(p.image);
   };
 
-  // Update product
   const handleUpdate = async () => {
     if (!title || !price || !description || !image) {
       alert("Fill all fields");

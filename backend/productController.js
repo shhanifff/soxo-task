@@ -52,7 +52,7 @@ export const editById = async (req, res) => {
     const updatedProduct = await ProductModel.findByIdAndUpdate(
       productId,
       { title, price, description, image },
-      { new: true }  // ✅ return updated document
+      { new: true } 
     );
 
     if (!updatedProduct) {
